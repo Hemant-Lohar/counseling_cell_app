@@ -1,3 +1,4 @@
+
 import 'package:counseling_cell_app/TakePictureScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
@@ -19,7 +20,7 @@ class _LoginDemoState extends State<LoginDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blue[50],
+        backgroundColor: Colors.blueGrey,
         appBar: AppBar(
           title: const Text(
             "Login",
@@ -44,6 +45,7 @@ class _LoginDemoState extends State<LoginDemo> {
                   ),
                 ),
                 const TextField(
+                  obscureText: true,
                   decoration: InputDecoration(hintText: 'Enter Password'),
                 ),
                 ElevatedButton(
@@ -53,7 +55,8 @@ class _LoginDemoState extends State<LoginDemo> {
                         MaterialPageRoute(builder: (context) => TakePictureScreen(camera: x)),
                       );
                     },
-                    child: const Text('Login'))
+                    child: const Text('Login')),
+
               ],
             ),
           ),

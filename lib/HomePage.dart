@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.blueGrey,
         appBar: AppBar(
           title: const Text(
-            "Login",
+            "HomePage",
             style: TextStyle(
               color: Colors.black,
             ),

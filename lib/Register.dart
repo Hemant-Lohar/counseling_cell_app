@@ -24,7 +24,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.blue[50],
         appBar: AppBar(
           title: const Text(
             "Register",
@@ -39,7 +39,7 @@ class _RegisterState extends State<Register> {
           padding: const EdgeInsets.all(36.0),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 //Image.asset('assets/images/logo.png'),
@@ -50,13 +50,16 @@ class _RegisterState extends State<Register> {
                 ),
                 const TextField(
                   obscureText: true,
+                   style: TextStyle(
+              color: Colors.black,
+            ),
                   decoration: InputDecoration(
-                    hintText: 'Choose a password',
+                    hintText: 'Enter a password',
                   ),
                 ),
-                const Text("Password must be atleast 7 characters"
-                    "\nPassword must have uppercase and lowercase letters"
-                    "\nPassword must have a spcial character"),
+                // const Text("Password must be atleast 7 characters"
+                //     "\nPassword must have uppercase and lowercase letters"
+                //     "\nPassword must have a spcial character"),
 
                 const TextField(
                   obscureText: true,

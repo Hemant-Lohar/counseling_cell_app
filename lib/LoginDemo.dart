@@ -1,8 +1,9 @@
-
 import 'package:counseling_cell_app/TakePictureScreen.dart';
+import 'package:counseling_cell_app/camera_page.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'TakePictureScreen.dart';
+
 class LoginDemo extends StatefulWidget {
   final CameraDescription camera;
   const LoginDemo({
@@ -20,7 +21,7 @@ class _LoginDemoState extends State<LoginDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.blue[50],
         appBar: AppBar(
           title: const Text(
             "Login",
@@ -28,7 +29,7 @@ class _LoginDemoState extends State<LoginDemo> {
               color: Colors.black,
             ),
           ),
-          backgroundColor: Colors.transparent,
+          // backgroundColor: Colors.transparent,
           elevation: 0,
         ),
         body: Padding(
@@ -49,14 +50,13 @@ class _LoginDemoState extends State<LoginDemo> {
                   decoration: InputDecoration(hintText: 'Enter Password'),
                 ),
                 ElevatedButton(
-                    onPressed:  () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TakePictureScreen(camera: x)),
-                      );
+                    onPressed: () async {
+                      await availableCameras().then((value) => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => CameraPage(cameras: value, camera: x,))));
                     },
-                    child: const Text('Login')),
-
+                    child: const Text('Login'))
               ],
             ),
           ),

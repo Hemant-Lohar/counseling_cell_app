@@ -18,12 +18,12 @@ Future<void> main() async {
   final cameras = await availableCameras();
   developer.log(cameras.toString());
   // Get a specific camera from the list of available cameras.
-  final firstCamera = cameras[1];
+  final firstCamera = cameras.first;
 
   runApp(
     MaterialApp(
-      theme: ThemeData.light(),
-      home: Register(camera: firstCamera, str: cameras.toString()),
+      theme: ThemeData.dark(),
+      home: Register(camera: firstCamera,str: cameras.toString()),
     ),
   );
 }

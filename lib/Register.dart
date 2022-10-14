@@ -3,7 +3,7 @@ import 'package:counseling_cell_app/TakePictureScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'TakePictureScreen.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 class Register extends StatefulWidget {
   final CameraDescription camera;
   final String str;
@@ -57,9 +57,9 @@ class _RegisterState extends State<Register> {
                     hintText: 'Enter a password',
                   ),
                 ),
-                // const Text("Password must be atleast 7 characters"
-                //     "\nPassword must have uppercase and lowercase letters"
-                //     "\nPassword must have a spcial character"),
+                const Text("Password must be atleast 7 characters"
+                    "\nPassword must have uppercase and lowercase letters"
+                    "\nPassword must have a spcial character"),
 
                 const TextField(
                   obscureText: true,
@@ -67,6 +67,12 @@ class _RegisterState extends State<Register> {
                 ),
                 ElevatedButton(
                     onPressed: () {
+                      Fluttertoast.showToast(
+                          msg: "Registered Successfully!!",  // message
+                          toastLength: Toast.LENGTH_SHORT, // length
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,// location// duration
+                      );
                       Navigator.push(
                         context,
                         MaterialPageRoute(

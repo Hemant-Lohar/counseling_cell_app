@@ -2,7 +2,7 @@
 import 'package:counseling_cell_app/TakePictureScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'TakePictureScreen.dart';
+import 'HomePage.dart';
 class LoginDemo extends StatefulWidget {
   final CameraDescription camera;
   const LoginDemo({
@@ -52,7 +52,7 @@ class _LoginDemoState extends State<LoginDemo> {
                     onPressed:  () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => TakePictureScreen(camera: x)),
+                        MaterialPageRoute(builder: (context) => HomePage(camera: x)),
                       );
                     },
                     child: const Text('Login')),

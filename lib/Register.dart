@@ -4,28 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'TakePictureScreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-const List<Widget> role = <Widget>[
-  Text('Counsellor'),
-  Text('User')
-];
+
+const List<Widget> role = <Widget>[Text('Counsellor'), Text('User')];
 final List<bool> _selectedRole = <bool>[true, false];
+var _usernameController = TextEditingController();
+var _passwordController = TextEditingController();
+var _confirmPasswordController = TextEditingController();
+
 class Register extends StatefulWidget {
   final CameraDescription camera;
   final String str;
-  const Register({
-    super.key,
-    required this.camera,
-    required this.str
-  });
+  const Register({super.key, required this.camera, required this.str});
 
   @override
-  _RegisterState createState() => _RegisterState(this.camera,this.str);
+  _RegisterState createState() => _RegisterState(this.camera, this.str);
 }
 
 class _RegisterState extends State<Register> {
   CameraDescription x;
   String str;
-  _RegisterState(this.x,this.str);
+  _RegisterState(this.x, this.str);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,14 +68,16 @@ class _RegisterState extends State<Register> {
                   children: role,
                 ),
                 //Image.asset('assets/images/logo.png'),
-                const TextField(
-                  decoration: InputDecoration(
+                TextFormField(
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
                     hintText: "Enter your email",
                   ),
                 ),
-                const TextField(
+                TextFormField(
                   obscureText: true,
-                  decoration: InputDecoration(
+                  controller: _passwordController,
+                  decoration: const InputDecoration(
                     hintText: 'Choose a password',
                   ),
                 ),
@@ -84,23 +85,27 @@ class _RegisterState extends State<Register> {
                     "\nPassword must have uppercase and lowercase\nletters and a numerical"
                     "\nPassword must have a spcial character"),
 
-                const TextField(
+                TextFormField(
                   obscureText: true,
-                  decoration: InputDecoration(hintText: 'Confirm password'),
+                  controller: _confirmPasswordController,
+                  decoration:
+                      const InputDecoration(hintText: 'Confirm password'),
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      Fluttertoast.showToast(
-                          msg: "Registered Successfully!!",  // message
+                      if (validate()) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginDemo(camera: x)),
+                        );
+                        Fluttertoast.showToast(
+                          msg: "Registered Successfully!!", // message
                           toastLength: Toast.LENGTH_SHORT, // length
                           gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,// location// duration
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LoginDemo(camera: x)),
-                      );
+                          timeInSecForIosWeb: 1, // location// duration
+                        );
+                      }
                     },
                     child: const Text('Register')),
                 InkWell(
@@ -113,12 +118,52 @@ class _RegisterState extends State<Register> {
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(10.0),
-                    child: Text("Already Registered ??\nClick here",textAlign: TextAlign.center,),
+                    child: Text(
+                      "Already Registered ??\nClick here",
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 )
               ],
             ),
           ),
         ));
+  }
+
+  bool validate() {
+    String patternUsername = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+    RegExp regexUsername = RegExp(patternUsername);
+    String  patternPassword = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    RegExp regexPassword = RegExp(patternPassword);
+    if (!regexUsername.hasMatch(_usernameController.text)) {
+      Fluttertoast.showToast(
+        msg: "Invalid email id", // message
+        toastLength: Toast.LENGTH_SHORT, // length
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1, // location// duration
+      );
+      return false;
+    }
+    if (!regexPassword.hasMatch(_passwordController.text)) {
+      Fluttertoast.showToast(
+        msg: "Invalid password", // message
+        toastLength: Toast.LENGTH_SHORT, // length
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1, // location// duration
+      );
+      return false;
+    }
+    if(_passwordController.text!=_confirmPasswordController.text){
+      Fluttertoast.showToast(
+        msg: "Passwords do not match", // message
+        toastLength: Toast.LENGTH_SHORT, // length
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1, // location// duration
+      );
+      return false;
+    }
+
+    return true;
+    // Continue
   }
 }

@@ -4,17 +4,43 @@ import 'package:camera/camera.dart';
 import 'TakePictureScreen.dart';
 class HomePage extends StatefulWidget {
   final CameraDescription camera;
+  final String user;
   const HomePage({
     super.key,
     required this.camera,
+    required this.user,
   });
   @override
-  _HomePageState createState() => _HomePageState(this.camera);
+  _HomePageState createState() => _HomePageState(this.camera,this.user);
 }
 
 class _HomePageState extends State<HomePage> {
   CameraDescription x;
-  _HomePageState(this.x);
+  String user;
+
+  _HomePageState(this.x, this.user);
+  Widget _test_widget(){
+    if (user=="User"){
+      return SizedBox(
+          height:100, //height of button
+          width:300, //width of button
+          child:ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TakePictureScreen(camera: x)),
+              );
+            },
+            child: const Text("Take initial assessment",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20)),));
+    }
+    else{
+      return Container(height:0); //or any other widget but not null
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,27 +62,14 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                    "Welcome user!!\nTake the mental health assessment to improve your experience!",
-                    style: TextStyle(
+                Text(
+                    "Welcome $user!!\nTake the mental health assessment to improve your experience!",
+                    style: const TextStyle(
                         color: Colors.white70,
                         fontWeight: FontWeight.bold,
                         fontSize: 30)),
-                SizedBox(
-                    height:100, //height of button
-                    width:300, //width of button
-                    child:ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TakePictureScreen(camera: x)),
-                          );
-                        },
-                        child: const Text("Take initial assessment",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20)),)),
+
+                _test_widget(),
 
               ],
             ),

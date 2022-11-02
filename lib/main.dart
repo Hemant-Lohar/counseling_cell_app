@@ -8,7 +8,6 @@ import 'TakePictureScreen.dart';
 import 'LoginDemo.dart';
 import 'Register.dart';
 import 'dart:developer' as developer;
-
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
   // can be called before `runApp()`
@@ -18,12 +17,12 @@ Future<void> main() async {
   final cameras = await availableCameras();
   developer.log(cameras.toString());
   // Get a specific camera from the list of available cameras.
-  final firstCamera = cameras.first;
+  final frontCamera = cameras[1];
 
   runApp(
     MaterialApp(
       theme: ThemeData.dark(),
-      home: Register(camera: firstCamera,str: cameras.toString()),
+      home: Register(camera: frontCamera,str: cameras.toString()),
     ),
   );
 }

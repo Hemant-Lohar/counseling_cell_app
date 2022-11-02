@@ -10,7 +10,6 @@ class TakePictureScreen extends StatefulWidget {
   });
 
   final CameraDescription camera;
-  
 
   @override
   TakePictureScreenState createState() => TakePictureScreenState();
@@ -27,7 +26,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     // create a CameraController.
     _controller = CameraController(
       // Get a specific camera from the list of available cameras.
-      
       widget.camera,
       // Define the resolution to use.
       ResolutionPreset.medium,

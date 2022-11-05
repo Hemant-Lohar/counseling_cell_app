@@ -1,8 +1,10 @@
-
-import 'package:counseling_cell_app/TakePictureScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'HomePage.dart';
+const List<Widget> role = <Widget>[Text('Counsellor'), Text('User')];
+final List<bool> _selectedRole = <bool>[true, false];
+var _usernameController = TextEditingController();
+var _passwordController = TextEditingController();
 class LoginDemo extends StatefulWidget {
   final CameraDescription camera;
   const LoginDemo({
@@ -39,14 +41,37 @@ class _LoginDemoState extends State<LoginDemo> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Image.asset('assets/images/logo.png'),
-                const TextField(
-                  decoration: InputDecoration(
+                ToggleButtons(
+                  isSelected: _selectedRole,
+                  onPressed: (int index) {
+                    setState(() {
+                      // The button that is tapped is set to true, and the others to false.
+                      for (int i = 0; i < _selectedRole.length; i++) {
+                        _selectedRole[i] = i == index;
+                      }
+                    });
+                  },
+                  borderRadius: const BorderRadius.all(Radius.circular(22)),
+                  selectedBorderColor: Colors.blueGrey,
+                  selectedColor: Colors.white,
+                  fillColor: Colors.blueGrey,
+                  color: Colors.white70,
+                  constraints: const BoxConstraints(
+                    minHeight: 40.0,
+                    minWidth: 100.0,
+                  ),
+                  children: role,
+                ),
+                TextFormField(
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
                     hintText: 'Enter Username',
                   ),
                 ),
-                const TextField(
+                TextFormField(
+                  controller: _passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(hintText: 'Enter Password'),
+                  decoration: const InputDecoration(hintText: 'Enter Password'),
                 ),
                 ElevatedButton(
                     onPressed:  () {

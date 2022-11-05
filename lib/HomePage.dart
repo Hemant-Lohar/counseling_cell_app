@@ -2,6 +2,8 @@ import 'package:counseling_cell_app/TakePictureScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'TakePictureScreen.dart';
+import 'mltest.dart';
+
 class HomePage extends StatefulWidget {
   final CameraDescription camera;
   const HomePage({
@@ -43,21 +45,33 @@ class _HomePageState extends State<HomePage> {
                         fontWeight: FontWeight.bold,
                         fontSize: 30)),
                 SizedBox(
-                    height:100, //height of button
-                    width:300, //width of button
-                    child:ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TakePictureScreen(camera: x)),
-                          );
-                        },
-                        child: const Text("Take initial assessment",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20)),)),
-
+                    height: 100, //height of button
+                    width: 300, //width of button
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  TakePictureScreen(camera: x)),
+                        );
+                      },
+                      child: const Text("Take initial assessment",
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                    )),
+                SizedBox(
+                    height: 100, //height of button
+                    width: 300, //width of button
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Ml()),
+                        );
+                      },
+                      child: const Text("Go to ML testing page",
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                    )),
               ],
             ),
           ),

@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'package:camera/camera.dart';
+
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({
   super.key,
   required this.camera,
   });
-
   final CameraDescription camera;
+
+
 
   @override
   TakePictureScreenState createState() => TakePictureScreenState();
@@ -44,6 +46,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
       appBar: AppBar(title: const Text('Take a picture')),
       // You must wait until the controller is initialized before displaying the
@@ -100,7 +105,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 // A widget that displays the picture taken by the user.
 class DisplayPictureScreen extends StatelessWidget {
   final String imagePath;
-
   const DisplayPictureScreen({super.key, required this.imagePath});
 
   @override
@@ -110,6 +114,7 @@ class DisplayPictureScreen extends StatelessWidget {
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
       body: Image.file(File(imagePath)),
+
     );
   }
 }

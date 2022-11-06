@@ -20,7 +20,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       theme: ThemeData.dark(),
-      home: Register(camera: frontCamera,str: cameras.toString()),
+      home: Register(camera: frontCamera),
     ),
   );
 }

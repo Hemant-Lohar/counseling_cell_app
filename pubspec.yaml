@@ -37,7 +37,8 @@ dependencies:
   firebase_core: ^2.1.1
   firebase_ml_model_downloader:
   tflite_flutter: ^0.9.0
-  dart_tensor: ^1.0.3
+  image_picker:
+  image:
 
 dev_dependencies:
   flutter_test:

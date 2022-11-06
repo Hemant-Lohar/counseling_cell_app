@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(36.0),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Text(
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                       child: const Text("Take initial assessment",
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                     )),
-                SizedBox(
+                /*SizedBox(
                     height: 100, //height of button
                     width: 300, //width of button
                     child: ElevatedButton(
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: const Text("Go to ML testing page",
                           style: TextStyle(color: Colors.white, fontSize: 20)),
-                    )),
+                    )),*/
               ],
             ),
           ),

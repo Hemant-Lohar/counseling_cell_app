@@ -38,7 +38,7 @@ class _LoginDemoState extends State<LoginDemo> {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset('assets/images/logo.png'),
                 ToggleButtons(

@@ -1,9 +1,11 @@
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'package:camera/camera.dart';
-
+import 'package:image/image.dart' as img;
+import 'package:tflite_flutter/tflite_flutter.dart';
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({
   super.key,
@@ -30,7 +32,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       // Get a specific camera from the list of available cameras.
       widget.camera,
       // Define the resolution to use.
-      ResolutionPreset.medium,
+      ResolutionPreset.veryHigh,
     );
 
     // Next, initialize the controller. This returns a Future.
@@ -78,7 +80,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             // Attempt to take a picture and get the file `image`
             // where it was saved.
             final image = await _controller.takePicture();
-
             if (!mounted) return;
 
             // If the picture was taken, display it on a new screen.
@@ -101,20 +102,62 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     );
   }
 }
-
 // A widget that displays the picture taken by the user.
 class DisplayPictureScreen extends StatelessWidget {
   final String imagePath;
-  const DisplayPictureScreen({super.key, required this.imagePath});
 
+  const DisplayPictureScreen({super.key, required this.imagePath});
   @override
   Widget build(BuildContext context) {
+    log(imagePath);
+    Image image = Image.file(File(imagePath));
+    /*double?  h = image.height;
+    double? w = image.width;
+    int height=0;
+    int width=0;
+    if(h!=null){height=h.toInt();}
+    if(w!=null){width=w.toInt();}
+    log("$height $width");*/
     return Scaffold(
       appBar: AppBar(title: const Text('Display the Picture')),
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
-      body: Image.file(File(imagePath)),
+      body: image,
 
     );
+
   }
+
+
 }
+/*void readImage(XFile image)async{
+  List<double> imgArray =[];
+  Image x = Image.file(File(image.path));
+  final bytes = await image.readAsBytes();
+  final decoder = img.JpegDecoder();
+  final decodedImg = decoder.decodeImage(bytes);
+  final decodedBytes = decodedImg!.getBytes(format: img.Format.rgb);
+
+  double?  h = x.height;
+  double? w = x.width;
+  int height=0;
+  int width=0;
+  if(h!=null){height=h.toInt();}
+  if(w!=null){width=w.toInt();}
+  log("$height $width");
+  for(int i = 0; i < height; i++){
+       for(int j = 0; j < width; j++){
+
+         int red = decodedBytes[decodedImg.width*3 + i*3];
+         int green = decodedBytes[decodedImg.width*3 + i*3 + 1];
+         int blue = decodedBytes[decodedImg.width*3 + i*3 + 2];
+         double gray = 0.3*red + 0.59*green + 0.11*blue;
+         imgArray.add(gray);
+       }
+
+      }
+      log(imgArray.toString());
+      log(imgArray.shape.toString());
+      //imgArray.reshape([1,43,43,1]);
+  return ;
+}*/

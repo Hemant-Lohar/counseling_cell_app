@@ -12,17 +12,15 @@ var _confirmPasswordController = TextEditingController();
 
 class Register extends StatefulWidget {
   final CameraDescription camera;
-  final String str;
-  const Register({super.key, required this.camera, required this.str});
+  const Register({super.key, required this.camera});
 
   @override
-  _RegisterState createState() => _RegisterState(this.camera, this.str);
+  _RegisterState createState() => _RegisterState(this.camera);
 }
 
 class _RegisterState extends State<Register> {
   CameraDescription x;
-  String str;
-  _RegisterState(this.x, this.str);
+  _RegisterState(this.x);
 
   @override
   Widget build(BuildContext context) {

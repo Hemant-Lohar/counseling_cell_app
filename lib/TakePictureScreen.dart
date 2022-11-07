@@ -1,4 +1,4 @@
-
+import 'package:counseling_cell_app/mltest.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -6,14 +6,14 @@ import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:image/image.dart' as img;
 import 'package:tflite_flutter/tflite_flutter.dart';
+
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({
-  super.key,
-  required this.camera,
+    super.key,
+    required this.camera,
   });
+
   final CameraDescription camera;
-
-
 
   @override
   TakePictureScreenState createState() => TakePictureScreenState();
@@ -48,9 +48,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Scaffold(
       appBar: AppBar(title: const Text('Take a picture')),
       // You must wait until the controller is initialized before displaying the
@@ -75,22 +72,18 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           // catch the error.
           try {
             // Ensure that the camera is initialized.
-            await _initializeControllerFuture;
-
-            // Attempt to take a picture and get the file `image`
-            // where it was saved.
-            final image = await _controller.takePicture();
-            if (!mounted) return;
-
+            _initializeControllerFuture;
+            // Attempt to take a picture and get the file `image` where it was saved.
+            final image = _controller.takePicture();
+            final arr = await readImage(await image);
+            log(arr.shape.toString());
+            /*var decodedImage = await decodeImageFromList(File(image.path).readAsBytesSync());
+            log("${decodedImage.height} ${decodedImage.width}");*/
             // If the picture was taken, display it on a new screen.
-            await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(
-                  // Pass the automatically generated path to
-                  // the DisplayPictureScreen widget.
-                  imagePath: image.path,
-                ),
-              ),
+
+            if (!mounted) return;
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) =>  Ml(arr: arr)),
             );
           } catch (e) {
             // If an error occurs, log the error to the console.
@@ -102,62 +95,31 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     );
   }
 }
-// A widget that displays the picture taken by the user.
-class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
 
-  const DisplayPictureScreen({super.key, required this.imagePath});
-  @override
-  Widget build(BuildContext context) {
-    log(imagePath);
-    Image image = Image.file(File(imagePath));
-    /*double?  h = image.height;
-    double? w = image.width;
-    int height=0;
-    int width=0;
-    if(h!=null){height=h.toInt();}
-    if(w!=null){width=w.toInt();}
-    log("$height $width");*/
-    return Scaffold(
-      appBar: AppBar(title: const Text('Display the Picture')),
-      // The image is stored as a file on the device. Use the `Image.file`
-      // constructor with the given path to display the image.
-      body: image,
-
-    );
-
-  }
-
-
-}
-/*void readImage(XFile image)async{
-  List<double> imgArray =[];
-  Image x = Image.file(File(image.path));
+// A function which takes image file as input and returns a 1*43*43*1 list
+Future<List<List<double>>> readImage(XFile image) async {
+  List<List<double>> imgArray = [];
   final bytes = await image.readAsBytes();
   final decoder = img.JpegDecoder();
-  final decodedImg = decoder.decodeImage(bytes);
-  final decodedBytes = decodedImg!.getBytes(format: img.Format.rgb);
-
-  double?  h = x.height;
-  double? w = x.width;
-  int height=0;
-  int width=0;
-  if(h!=null){height=h.toInt();}
-  if(w!=null){width=w.toInt();}
-  log("$height $width");
-  for(int i = 0; i < height; i++){
-       for(int j = 0; j < width; j++){
-
-         int red = decodedBytes[decodedImg.width*3 + i*3];
-         int green = decodedBytes[decodedImg.width*3 + i*3 + 1];
-         int blue = decodedBytes[decodedImg.width*3 + i*3 + 2];
-         double gray = 0.3*red + 0.59*green + 0.11*blue;
-         imgArray.add(gray);
-       }
-
-      }
-      log(imgArray.toString());
-      log(imgArray.shape.toString());
-      //imgArray.reshape([1,43,43,1]);
-  return ;
-}*/
+  final decodedImgOriginal = decoder.decodeImage(bytes);
+  final decodedBytes = decodedImgOriginal!.getBytes(format: img.Format.rgb);
+  img.Image thumbnail = img.copyResize(decodedImgOriginal, width: 48, height: 48);
+  final decodedImg = thumbnail;
+  int height = decodedImg.height;
+  int width = decodedImg.width;
+  //log("$height $width");
+  for (int y = 0; y < height; y++) {
+    imgArray.add([]);
+    for (int x = 0; x < width; x++) {
+      int red = decodedBytes[y * decodedImg.width * 3 + x * 3];
+      int green = decodedBytes[y * decodedImg.width * 3 + x * 3 + 1];
+      int blue = decodedBytes[y * decodedImg.width * 3 + x * 3 + 2];
+      double gray = 0.3 * red + 0.59 * green + 0.11 * blue;
+      imgArray[y].add(gray);
+    }
+  }
+  //log(imgArray[0].toString());
+  imgArray.reshape([1, 48, 48, 1]);
+  //log(imgArray.shape.toString());
+  return imgArray;
+}

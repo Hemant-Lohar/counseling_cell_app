@@ -1,8 +1,8 @@
 import 'package:counseling_cell_app/TakePictureScreen.dart';
+import 'package:counseling_cell_app/userHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'TakePictureScreen.dart';
-import 'mltest.dart';
 
 class HomePage extends StatefulWidget {
   final CameraDescription camera;
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.blueGrey,
         appBar: AppBar(
           title: const Text(
-            "Login",
+            "Homepage for user",
             style: TextStyle(
               color: Colors.black,
             ),
@@ -49,14 +49,29 @@ class _HomePageState extends State<HomePage> {
                     width: 300, //width of button
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
+                        /*Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
                                   TakePictureScreen(camera: x)),
-                        );
+                        );*/
                       },
                       child: const Text("Take initial assessment",
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                    )),
+                SizedBox(
+                    height: 100, //height of button
+                    width: 300, //width of button
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const userHomePage()),
+                        );
+                      },
+                      child: const Text("Skip assessment for now",
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                     )),
                 /*SizedBox(
@@ -66,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const Ml()),
+                          MaterialPageRoute(builder: (context) =>  Ml()),
                         );
                       },
                       child: const Text("Go to ML testing page",

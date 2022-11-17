@@ -41,7 +41,7 @@ class _RegisterState extends State<Register> {
           padding: const EdgeInsets.all(36.0),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ToggleButtons(

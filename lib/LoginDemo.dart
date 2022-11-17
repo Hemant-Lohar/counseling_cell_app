@@ -1,3 +1,4 @@
+import 'package:counseling_cell_app/counsellorHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'HomePage.dart';
@@ -37,8 +38,9 @@ class _LoginDemoState extends State<LoginDemo> {
           padding: const EdgeInsets.all(36.0),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
+
               children: [
                 Image.asset('assets/images/logo.png'),
                 ToggleButtons(
@@ -75,10 +77,19 @@ class _LoginDemoState extends State<LoginDemo> {
                 ),
                 ElevatedButton(
                     onPressed:  () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage(camera: x)),
-                      );
+                      if(_selectedRole[0]){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const counsellorHomePage()),
+                        );
+                      }
+                      else{
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage(camera: x)),
+                        );
+                      }
+
                     },
                     child: const Text('Login')),
 

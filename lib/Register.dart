@@ -1,7 +1,6 @@
 import 'package:counseling_cell_app/LoginDemo.dart';
 import 'package:counseling_cell_app/TakePictureScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
 import 'TakePictureScreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 const List<Widget> role = <Widget>[Text('Counsellor'), Text('User')];
@@ -11,16 +10,14 @@ var _passwordController = TextEditingController();
 var _confirmPasswordController = TextEditingController();
 
 class Register extends StatefulWidget {
-  final CameraDescription camera;
-  const Register({super.key, required this.camera});
+  const Register({super.key});
 
   @override
-  _RegisterState createState() => _RegisterState(this.camera);
+  _RegisterState createState() => _RegisterState();
 }
 
 class _RegisterState extends State<Register> {
-  CameraDescription x;
-  _RegisterState(this.x);
+  _RegisterState();
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +92,7 @@ class _RegisterState extends State<Register> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => LoginDemo(camera: x)),
+                              builder: (context) => LoginDemo()),
                         );
                         Fluttertoast.showToast(
                           msg: "Registered Successfully!!", // message
@@ -111,7 +108,7 @@ class _RegisterState extends State<Register> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => LoginDemo(camera: x)),
+                          builder: (context) => LoginDemo()),
                     );
                   },
                   child: const Padding(

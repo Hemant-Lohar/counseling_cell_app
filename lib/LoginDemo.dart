@@ -1,25 +1,21 @@
 import 'package:counseling_cell_app/counsellorHomePage.dart';
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
 import 'HomePage.dart';
 const List<Widget> role = <Widget>[Text('Counsellor'), Text('User')];
 final List<bool> _selectedRole = <bool>[true, false];
 var _usernameController = TextEditingController();
 var _passwordController = TextEditingController();
 class LoginDemo extends StatefulWidget {
-  final CameraDescription camera;
   const LoginDemo({
     super.key,
-    required this.camera,
   });
 
   @override
-  _LoginDemoState createState() => _LoginDemoState(this.camera);
+  _LoginDemoState createState() => _LoginDemoState();
 }
 
 class _LoginDemoState extends State<LoginDemo> {
-  CameraDescription x;
-  _LoginDemoState(this.x);
+  _LoginDemoState();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,7 +82,7 @@ class _LoginDemoState extends State<LoginDemo> {
                       else{
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => HomePage(camera: x)),
+                          MaterialPageRoute(builder: (context) => HomePage()),
                         );
                       }
 

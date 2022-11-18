@@ -1,12 +1,20 @@
 import 'dart:developer';
+import 'package:counseling_cell_app/userHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
-
-
 TextEditingController _textcontroller = TextEditingController();
-List <String> labels = ["Angry","Disgust","Fear","Happy","Sad","Surprise","Neutral"];
+List<String> labels = [
+  "Angry",
+  "Disgust",
+  "Fear",
+  "Happy",
+  "Sad",
+  "Surprise",
+  "Neutral"
+];
+
 class Ml extends StatefulWidget {
   final List arr;
   const Ml({
@@ -39,8 +47,8 @@ class _MlState extends State<Ml> {
       // The CustomModel object contains the local path of the model file, which you can use to instantiate a TensorFlow Lite interpreter.
       //final localModelPath = customModel.file;
 
-      int result = predict(customModel,arr);
-      _textcontroller.text = labels[result].toString();
+      int result = predict(customModel, arr);
+      _textcontroller.text = "Detected emotion: " + labels[result].toString();
     });
 
     return Scaffold(
@@ -64,7 +72,16 @@ class _MlState extends State<Ml> {
               children: [
                 TextField(
                   controller: _textcontroller,
-                  ),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const userHomePage()),
+                      );
+                    },
+                    child: Text("Go to homepage")),
               ],
             ),
           ),
@@ -78,18 +95,18 @@ class _MlState extends State<Ml> {
 
     List op = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
     ip = ListShape(ip).reshape([1, 48, 48, 1]);
-    op = ListShape(op).reshape([1,7]);
+    op = ListShape(op).reshape([1, 7]);
     log("Input shape${ListShape(ip).shape.toString()}");
     log("Input expected${interpreter.getInputTensors().toString()}");
     //log("Input shape${ip.runtimeType.toString()}");
     log("Output shape${ListShape(op).shape.toString()}");
     log("Output expected${interpreter.getOutputTensors().toString()}");
-    interpreter.run(ip,op);
+    interpreter.run(ip, op);
     log(op.toString());
-    int max=0;
-    for(int i=0;i<7;i++){
-      if(op[0][max]<op[0][i]){
-        max=i;
+    int max = 0;
+    for (int i = 0; i < 7; i++) {
+      if (op[0][max] < op[0][i]) {
+        max = i;
       }
     }
     log("Index of max value: ${max.toString()}");

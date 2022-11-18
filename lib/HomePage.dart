@@ -49,12 +49,12 @@ class _HomePageState extends State<HomePage> {
                     width: 300, //width of button
                     child: ElevatedButton(
                       onPressed: () {
-                        /*Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
                                   TakePictureScreen(camera: x)),
-                        );*/
+                        );
                       },
                       child: const Text("Take initial assessment",
                           style: TextStyle(color: Colors.white, fontSize: 20)),

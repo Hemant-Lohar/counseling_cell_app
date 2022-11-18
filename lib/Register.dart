@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'TakePictureScreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 const List<Widget> role = <Widget>[Text('Counsellor'), Text('User')];
 final List<bool> _selectedRole = <bool>[true, false];
 var _usernameController = TextEditingController();
@@ -24,7 +25,6 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         backgroundColor: Colors.blueGrey,
         appBar: AppBar(
@@ -56,7 +56,7 @@ class _RegisterState extends State<Register> {
                   },
                   borderRadius: const BorderRadius.all(Radius.circular(22)),
                   selectedBorderColor: Colors.blueGrey,
-                  selectedColor: Colors.white,
+                  selectedColor: Colors.black,
                   fillColor: Colors.blueGrey,
                   color: Colors.white70,
                   constraints: const BoxConstraints(
@@ -66,29 +66,31 @@ class _RegisterState extends State<Register> {
                   children: role,
                 ),
                 //Image.asset('assets/images/logo.png'),
-                TextFormField(
-                  controller: _usernameController,
-                  decoration: const InputDecoration(
-                    hintText: "Enter your email",
-                  ),
-                ),
-                TextFormField(
-                  obscureText: true,
-                  controller: _passwordController,
-                  decoration: const InputDecoration(
-                    hintText: 'Choose a password',
-                  ),
-                ),
-                const Text("Password must be atleast 7 characters"
-                    "\nPassword must have uppercase and lowercase\nletters and a numerical"
-                    "\nPassword must have a spcial character"),
+                // TextFormField(
+                //   controller: _usernameController,
+                  
+                //   decoration: const InputDecoration(
+                //     hintText: "Enter your email",
+                //     fillColor: Color(Colors.blue),
+                //   ),
+                // ),
+                // TextFormField(
+                //   obscureText: true,
+                //   controller: _passwordController,
+                //   decoration: const InputDecoration(
+                //     hintText: 'Choose a password',
+                //   ),
+                // ),
+                // const Text("Password must be atleast 7 characters"
+                //     "\nPassword must have uppercase and lowercase\nletters and a numerical"
+                //     "\nPassword must have a spcial character"),
 
-                TextFormField(
-                  obscureText: true,
-                  controller: _confirmPasswordController,
-                  decoration:
-                      const InputDecoration(hintText: 'Confirm password'),
-                ),
+                // TextFormField(
+                //   obscureText: true,
+                //   controller: _confirmPasswordController,
+                //   decoration:
+                //       const InputDecoration(hintText: 'Confirm password'),
+                // ),
                 ElevatedButton(
                     onPressed: () {
                       if (validate()) {
@@ -117,7 +119,7 @@ class _RegisterState extends State<Register> {
                   child: const Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Text(
-                      "Already Registered ??\nClick here",
+                      "Already Registered? Click here",
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -129,9 +131,11 @@ class _RegisterState extends State<Register> {
   }
 
   bool validate() {
-    String patternUsername = r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
+    String patternUsername =
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
     RegExp regexUsername = RegExp(patternUsername);
-    String  patternPassword = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+    String patternPassword =
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
     RegExp regexPassword = RegExp(patternPassword);
     if (!regexUsername.hasMatch(_usernameController.text)) {
       Fluttertoast.showToast(
@@ -151,7 +155,7 @@ class _RegisterState extends State<Register> {
       );
       return false;
     }
-    if(_passwordController.text!=_confirmPasswordController.text){
+    if (_passwordController.text != _confirmPasswordController.text) {
       Fluttertoast.showToast(
         msg: "Passwords do not match", // message
         toastLength: Toast.LENGTH_SHORT, // length

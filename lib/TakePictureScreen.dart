@@ -1,12 +1,13 @@
-import 'package:counseling_cell_app/mltest.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:image/image.dart' as img;
-import 'package:tflite_flutter/tflite_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
+// A screen that allows users to take a picture using a given camera.
 class TakePictureScreen extends StatefulWidget {
   const TakePictureScreen({
     super.key,
@@ -74,16 +75,14 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             // Ensure that the camera is initialized.
             _initializeControllerFuture;
             // Attempt to take a picture and get the file `image` where it was saved.
-            final image = _controller.takePicture();
-            final arr = await readImage(await image);
-            log(arr.shape.toString());
-            /*var decodedImage = await decodeImageFromList(File(image.path).readAsBytesSync());
-            log("${decodedImage.height} ${decodedImage.width}");*/
-            // If the picture was taken, display it on a new screen.
+            final image = await _controller.takePicture();
 
             if (!mounted) return;
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) =>  Ml(arr: arr)),
+              MaterialPageRoute(
+                  builder: (context) => DisplayPictureScreen(
+                        imagePath: image.path,
+                      )),
             );
           } catch (e) {
             // If an error occurs, log the error to the console.
@@ -96,30 +95,20 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   }
 }
 
-// A function which takes image file as input and returns a 1*43*43*1 list
-Future<List<List<double>>> readImage(XFile image) async {
-  List<List<double>> imgArray = [];
-  final bytes = await image.readAsBytes();
-  final decoder = img.JpegDecoder();
-  final decodedImgOriginal = decoder.decodeImage(bytes);
-  final decodedBytes = decodedImgOriginal!.getBytes(format: img.Format.rgb);
-  img.Image thumbnail = img.copyResize(decodedImgOriginal, width: 48, height: 48);
-  final decodedImg = thumbnail;
-  int height = decodedImg.height;
-  int width = decodedImg.width;
-  //log("$height $width");
-  for (int y = 0; y < height; y++) {
-    imgArray.add([]);
-    for (int x = 0; x < width; x++) {
-      int red = decodedBytes[y * decodedImg.width * 3 + x * 3];
-      int green = decodedBytes[y * decodedImg.width * 3 + x * 3 + 1];
-      int blue = decodedBytes[y * decodedImg.width * 3 + x * 3 + 2];
-      double gray = 0.3 * red + 0.59 * green + 0.11 * blue;
-      imgArray[y].add(gray);
-    }
+// A widget that displays the picture taken by the user.
+class DisplayPictureScreen extends StatelessWidget {
+  final String imagePath;
+
+  const DisplayPictureScreen({super.key, required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(title: const Text('Display the Picture')),
+        // The image is stored as a file on the device. Use the `Image.file`
+        // constructor with the given path to display the image.
+        body: Image.file(File(imagePath))
+        //img.file(File(imagePath)),
+        );
   }
-  //log(imgArray[0].toString());
-  imgArray.reshape([1, 48, 48, 1]);
-  //log(imgArray.shape.toString());
-  return imgArray;
 }

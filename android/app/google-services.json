@@ -1,34 +1,113 @@
 {
   "project_info": {
-    "project_number": "897905934703",
-    "project_id": "counsellingcellapp6969",
-    "storage_bucket": "counsellingcellapp6969.appspot.com"
+    "project_number": "685611219262",
+    "project_id": "counselling-cell-app",
+    "storage_bucket": "counselling-cell-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:897905934703:android:1fd3c1be2377ea2b0ca89a",
+        "mobilesdk_app_id": "1:685611219262:android:a1d69af1b9e0ba6291146f",
         "android_client_info": {
-          "package_name": "com.example.counseling_cell_app"
+          "package_name": "com.adcet.counselling_cell_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "897905934703-l70fn1qpt7lkboibrs98qh84dikhkb1v.apps.googleusercontent.com",
+          "client_id": "685611219262-9c21nimklic150vrkkqfasbti20g28o2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBVUs7khLEzn2bsOWNGYbdzgXm8uFaJYYU"
+          "current_key": "AIzaSyD0epEIpwWwtefwVuupOdO4iTmtsT9m6no"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "897905934703-l70fn1qpt7lkboibrs98qh84dikhkb1v.apps.googleusercontent.com",
+              "client_id": "685611219262-9c21nimklic150vrkkqfasbti20g28o2.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "685611219262-kpav9lqvq1vjoga016v3bornjrkcoue8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.counsellingCellApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685611219262:android:4b1488abc5250da291146f",
+        "android_client_info": {
+          "package_name": "com.example.counseling_cell_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685611219262-9c21nimklic150vrkkqfasbti20g28o2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0epEIpwWwtefwVuupOdO4iTmtsT9m6no"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685611219262-9c21nimklic150vrkkqfasbti20g28o2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "685611219262-kpav9lqvq1vjoga016v3bornjrkcoue8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.counsellingCellApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685611219262:android:0a6c9964be63e6f891146f",
+        "android_client_info": {
+          "package_name": "com.example.counselling_cell_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685611219262-9c21nimklic150vrkkqfasbti20g28o2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0epEIpwWwtefwVuupOdO4iTmtsT9m6no"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685611219262-9c21nimklic150vrkkqfasbti20g28o2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "685611219262-kpav9lqvq1vjoga016v3bornjrkcoue8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.counsellingCellApp"
+              }
             }
           ]
         }

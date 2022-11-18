@@ -3,8 +3,7 @@ import 'package:counseling_cell_app/TakePictureScreen.dart';
 import 'package:flutter/material.dart';
 import 'TakePictureScreen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-const List<Widget> role = <Widget>[Text('Counsellor'), Text('User')];
-final List<bool> _selectedRole = <bool>[true, false];
+
 var _usernameController = TextEditingController();
 var _passwordController = TextEditingController();
 var _confirmPasswordController = TextEditingController();
@@ -41,27 +40,7 @@ class _RegisterState extends State<Register> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ToggleButtons(
-                  isSelected: _selectedRole,
-                  onPressed: (int index) {
-                    setState(() {
-                      // The button that is tapped is set to true, and the others to false.
-                      for (int i = 0; i < _selectedRole.length; i++) {
-                        _selectedRole[i] = i == index;
-                      }
-                    });
-                  },
-                  borderRadius: const BorderRadius.all(Radius.circular(22)),
-                  selectedBorderColor: Colors.blueGrey,
-                  selectedColor: Colors.white,
-                  fillColor: Colors.blueGrey,
-                  color: Colors.white70,
-                  constraints: const BoxConstraints(
-                    minHeight: 40.0,
-                    minWidth: 100.0,
-                  ),
-                  children: role,
-                ),
+
                 //Image.asset('assets/images/logo.png'),
                 TextFormField(
                   controller: _usernameController,

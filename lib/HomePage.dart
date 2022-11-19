@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(36.0),
+          padding: const EdgeInsets.symmetric(horizontal:36.0),
           
           child: Center(
             child: Column(
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  height: 400,
+                  height: 200,
                   decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage('assets/images/assessment.png'),
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 //     )
                 //     ),
 
-                    const SizedBox(height: 40),
+                const SizedBox(height: 40),
                 SizedBox(
                     //width of button
                     child: ElevatedButton(
@@ -118,6 +118,8 @@ class _HomePageState extends State<HomePage> {
                         child: const Text("Skip Assessment for Now")
                         )
                         ),
+
+                        
                 /*SizedBox(
                     height: 100, //height of button
                     width: 300, //width of button
